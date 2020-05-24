@@ -10,12 +10,28 @@ description: |
 
 skipNodeEmails: true
 
+targetNodes:
+  nodeGroup: '*'
+
 globals:
+  OS:
  
 
 onInstall:
- 
+  - detect-os
+  - download-install-zabbix
+
+
 actions:
-  
+  detect-os:
+    - log: detect the operating system
+
+
+  download-install-zabbix:
+    - log: Downloads and installs Zabbix Agent
+    - cmd [${targetNodes.nodeGroup}]: |-
+
+
+
 success:
   text: text/success-text.md
