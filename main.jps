@@ -1,5 +1,5 @@
 type: update
-version: 1.1
+version: 0.1
 name: Zabbix Agent
 baseUrl: https://raw.githubusercontent.com/panslothda/Jelastic-Zabbix-Agent/master
 logo: images/zabbix.svg
