@@ -1,0 +1,21 @@
+type: update
+version: 1.1
+name: Zabbix Agent
+baseUrl: https://raw.githubusercontent.com/panslothda/Jelastic-Zabbix-Agent/master
+logo: images/zabbix.svg
+homepage: https://zabbix.com
+description: |
+  Zabbix Agent for monitoring of nodes and servers  
+  This Addon installs the Agent and allows you to configure it.
+
+skipNodeEmails: true
+
+globals:
+ 
+
+onInstall:
+ 
+actions:
+  
+success:
+  text: text/success-text.md
