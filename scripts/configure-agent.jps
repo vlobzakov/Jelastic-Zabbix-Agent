@@ -32,6 +32,8 @@ actions:
     - assert:
       - "'${globals.REMOTE_LOGGING}' == 'true'"
       - "'${globals.REMOTE_COMMAND}' == 'false'"
+      - "'${settings.RemoteCMD}' == 'true'"
+      - "'${settings.RemoteLogging}' == 'false'"
     - if (settings.RemoteCMD === true):
         setGlobals: 
           REMOTE_COMMAND: AllowKey=system.run[*]
