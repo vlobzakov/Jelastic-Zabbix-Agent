@@ -31,10 +31,6 @@ settings:
       caption: Enable logging of executed shell commands as warnings
       value: false
 
-globals:
-  SERVER_IP: ${settings.serverIP}
-  REMOTE_COMMAND: ${settings.remoteCMD}
-  REMOTE_LOGGING: ${settings.remoteLogging}
 
 onInstall:
   - variables-modification
@@ -56,18 +52,23 @@ buttons:
 actions:
   variables-modification:
     - log: check variables and set them correctly
-    - if (globals.REMOTE_COMMAND === true):
+    - assert:
+      - "'${globals.REMOTE_LOGGING}' == 'true'"
+      - "'${globals.REMOTE_COMMAND}' == 'false'"
+    - if (settings.RemoteCMD === true):
         setGlobals: 
           REMOTE_COMMAND: AllowKey=system.run[*]
     - else:
         setGlobals: 
           REMOTE_COMMAND: DenyKey=system.run[*]
-    - if (globals.REMOTE_LOGGING === true):
+    - if (settings.RemoteLogging === true):
         setGlobals: 
           REMOTE_LOGGING: 1
     - else:
         setGlobals: 
           REMOTE_LOGGING: 0
+    - setGlobals:
+      SERVER_IP: ${settings.serverIP}
 
   download-install-zabbix:
     - log: Downloads and installs Zabbix Agent
@@ -110,7 +111,3 @@ actions:
       settings:
         node: "${targetNodes.nodeGroup}"
       skipEmail: true
-
-
-success:
-  text: text/success-text.md
