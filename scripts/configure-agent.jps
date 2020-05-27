@@ -15,11 +15,11 @@ settings:
     - type: checkbox
       name: RemoteCMD
       caption: Enable remote commands from Zabbix server
-      value: false
+
     - type: checkbox
       name: RemoteLogging
       caption: Enable logging of executed shell commands as warnings
-      value: false
+ 
 
 
 onInstall:
