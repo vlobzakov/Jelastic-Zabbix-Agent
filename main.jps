@@ -6,9 +6,9 @@ logo: images/zabbix.svg
 homepage: https://zabbix.com
 description: |
   Zabbix Agent for monitoring of nodes and servers  
-  This Addon installs the Agent and allows you to configure it.
+  This Addon installs the Agent and allows you to configure it.  
   **Only CENTOS based nodes are supported**
-
+short: Zabbix Agent for monitoring of nodes and servers
 skipNodeEmails: true
 
 targetNodes:
@@ -19,20 +19,25 @@ settings:
   fields:
     - type: string
       name: serverIP
-      caption: Internal IP of Zabbix Server
+      caption: Zabbix server IP
       placeholder: 10.0.0.1
       required: true
     - type: checkbox
       name: remoteCMD
       caption: Enable remote commands from Zabbix server
       value: false
-
+    - type: checkbox
+      name: remoteLogging
+      caption: Enable logging of executed shell commands as warnings
+      value: false
 
 globals:
   SERVER_IP: ${settings.serverIP}
   REMOTE_COMMAND: ${settings.remoteCMD}
+  REMOTE_LOGGING: ${settings.remoteLogging}
 
 onInstall:
+  - variables-modification
   - download-install-zabbix
   - configure-zabbix-agent
 
@@ -49,6 +54,21 @@ buttons:
 
 
 actions:
+  variables-modification:
+    - log: check variables and set them correctly
+    - if (globals.REMOTE_COMMAND === true):
+        setGlobals: 
+          REMOTE_COMMAND: AllowKey=system.run[*]
+    - else:
+        setGlobals: 
+          REMOTE_COMMAND: DenyKey=system.run[*]
+    - if (globals.REMOTE_LOGGING === true):
+        setGlobals: 
+          REMOTE_LOGGING: 1
+    - else:
+        setGlobals: 
+          REMOTE_LOGGING: 0
+
   download-install-zabbix:
     - log: Downloads and installs Zabbix Agent
     - cmd [${targetNodes.nodeGroup}]: |-
@@ -68,8 +88,10 @@ actions:
         sed -i "119i Server=${globals.SERVER_IP}" /etc/zabbix/zabbix_agentd.conf
         sed -i '160d' /etc/zabbix/zabbix_agentd.conf
         sed -i "160i ServerActive=${globals.SERVER_IP}" /etc/zabbix/zabbix_agentd.conf
-        sed -i '94d' /etc/zabbix/zabbix_agentd.conf
-        sed -i "94i EnableRemoteCommands=${globals.REMOTE_COMMAND}" /etc/zabbix/zabbix_agentd.conf
+        sed -i '76d' /etc/zabbix/zabbix_agentd.conf
+        sed -i "76i ${globals.REMOTE_COMMAND}" /etc/zabbix/zabbix_agentd.conf
+        sed -i '103d' /etc/zabbix/zabbix_agentd.conf
+        sed -i "103i LogRemoteCommands=${globals.REMOTE_LOGGING}" /etc/zabbix/zabbix_agentd.conf
       user: root
       sayYes: true
 
@@ -83,10 +105,9 @@ actions:
 
   configure:
     - log: Configure the zabbix Agent
-    - cmd [${targetNodes.nodeGroup}]: |-
-        
-      user: root
-      sayYes: true
+    - install: ${baseUrl}/scripts/configure-agent.jps
+      skipEmail: true
+      settings:
 
 
 success:
