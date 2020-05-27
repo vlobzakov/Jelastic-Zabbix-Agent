@@ -13,8 +13,12 @@ skipNodeEmails: true
 targetNodes:
   nodeGroup: '*'
 
+globals:
+  SERVER_IP: 
+
 onInstall:
   - download-install-zabbix
+  - configure-zabbix-agent
 
 
 buttons:
@@ -34,8 +38,19 @@ actions:
     - cmd [${targetNodes.nodeGroup}]: |-
         rpm --import https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-A14FE591 &>> /var/log/run.log
         rpm -Uvh https://repo.zabbix.com/zabbix/5.0/rhel/7/x86_64/zabbix-agent-5.0.0-1.el7.x86_64.rpm &>> /var/log/run.log
+        echo /etc/zabbix >> /etc/jelastic/redeploy.conf
       user: root
       sayYes: true
+
+  configure-zabbix-agent:
+    - log: Configures the Zabbix Agent with chosen Details
+    - cmd [${targetNodes.nodeGroup}]: |-
+        SERVER=$(hostname)
+        sed -i '171d' /etc/zabbix/zabbix_agentd.conf
+        sed -i "171i Hostname=$SERVER" /etc/zabbix/zabbix_agentd.conf
+      user: root
+      sayYes: true
+
 
   update:
     - log: Updates the zabbix Agent
