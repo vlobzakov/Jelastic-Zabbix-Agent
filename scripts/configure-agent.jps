@@ -13,18 +13,13 @@ settings:
       placeholder: 10.0.0.1
       required: true
     - type: checkbox
-      name: remoteCMD
+      name: RemoteCMD
       caption: Enable remote commands from Zabbix server
       value: false
     - type: checkbox
-      name: remoteLogging
+      name: RemoteLogging
       caption: Enable logging of executed shell commands as warnings
       value: false
-
-globals:
-  SERVER_IP: ${settings.serverIP}
-  REMOTE_COMMAND: ${settings.remoteCMD}
-  REMOTE_LOGGING: ${settings.remoteLogging}
 
 
 onInstall:
@@ -37,18 +32,20 @@ actions:
     - assert:
       - "'${globals.REMOTE_LOGGING}' == 'true'"
       - "'${globals.REMOTE_COMMAND}' == 'false'"
-    - if (globals.REMOTE_COMMAND === true):
+    - if (settings.RemoteCMD === true):
         setGlobals: 
           REMOTE_COMMAND: AllowKey=system.run[*]
     - else:
         setGlobals: 
           REMOTE_COMMAND: DenyKey=system.run[*]
-    - if (globals.REMOTE_LOGGING === true):
+    - if (settings.RemoteLogging === true):
         setGlobals: 
           REMOTE_LOGGING: 1
     - else:
         setGlobals: 
           REMOTE_LOGGING: 0
+    - setGlobals:
+      SERVER_IP: ${settings.serverIP}
 
   configure-zabbix-agent:
     - log: Configures the Zabbix Agent with chosen details
