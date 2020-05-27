@@ -47,7 +47,7 @@ actions:
         setGlobals: 
           REMOTE_LOGGING: 0
     - setGlobals:
-      SERVER_IP: ${settings.serverIP}
+        SERVER_IP: ${settings.serverIP}
 
   configure-zabbix-agent:
     - log: Configures the Zabbix Agent with chosen details
