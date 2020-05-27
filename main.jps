@@ -13,9 +13,23 @@ skipNodeEmails: true
 targetNodes:
   nodeGroup: '*'
 
+
+settings:
+  fields:
+    - type: string
+      name: serverIP
+      caption: Internal IP of Zabbix Server
+      placeholder: 10.0.0.1
+      required: true
+    - type: checkbox
+      name: remoteCMD
+      caption: Enable remote commands from Zabbix server
+      value: false
+
+
 globals:
-  SERVER_IP: 
-  REMOTE_COMMAND:
+  SERVER_IP: ${settings.serverIP}
+  REMOTE_COMMAND: ${settings.remoteCMD}
 
 onInstall:
   - download-install-zabbix
