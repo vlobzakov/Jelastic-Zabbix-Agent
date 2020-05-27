@@ -13,24 +13,43 @@ skipNodeEmails: true
 targetNodes:
   nodeGroup: '*'
 
-globals:
-  OS:
- 
-
 onInstall:
-  - detect-os
   - download-install-zabbix
 
 
+buttons:
+  - confirmText: Do you want to update the Zabbix Agent?
+    loadingText: Updating...
+    action: update
+    caption: Update Zabbix Agent
+    successText: Zabbix Agent has been upgraded
+  - caption: Configure
+    settings: main
+    action: configure
+
+
 actions:
-  detect-os:
-    - log: detect the operating system
-
-
   download-install-zabbix:
     - log: Downloads and installs Zabbix Agent
     - cmd [${targetNodes.nodeGroup}]: |-
+        rpm --import https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-A14FE591 &>> /var/log/run.log
+        rpm -Uvh https://repo.zabbix.com/zabbix/5.0/rhel/7/x86_64/zabbix-agent-5.0.0-1.el7.x86_64.rpm &>> /var/log/run.log
+      user: root
+      sayYes: true
 
+  update:
+    - log: Updates the zabbix Agent
+    - cmd [${targetNodes.nodeGroup}]: |-
+
+      user: root
+      sayYes: true
+
+  configure:
+    - log: Configure the zabbix Agent
+    - cmd [${targetNodes.nodeGroup}]: |-
+        
+      user: root
+      sayYes: true
 
 
 success:
