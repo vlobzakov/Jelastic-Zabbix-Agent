@@ -34,6 +34,9 @@ onInstall:
 actions:
   variables-modification:
     - log: check variables and set them correctly
+    - assert:
+      - "'${globals.REMOTE_LOGGING}' == 'true'"
+      - "'${globals.REMOTE_COMMAND}' == 'false'"
     - if (globals.REMOTE_COMMAND === true):
         setGlobals: 
           REMOTE_COMMAND: AllowKey=system.run[*]
