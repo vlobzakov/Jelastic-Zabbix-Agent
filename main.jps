@@ -23,11 +23,10 @@ settings:
       placeholder: 10.0.0.1
       required: true
     - type: checkbox
-      name: remoteCMD
+      name: remotecmd
       caption: Enable remote commands from Zabbix server
-      value: false
     - type: checkbox
-      name: remoteLogging
+      name: remotelogging
       caption: Enable logging of executed shell commands as warnings
       value: false
 
@@ -55,17 +54,18 @@ actions:
   variables-modification:
     - log: check variables and set them correctly
     - assert:
+      - "'${settings.serverIP}' == '10.0.0.5'"
       - "'${globals.REMOTE_LOGGING}' == 'true'"
       - "'${globals.REMOTE_COMMAND}' == 'false'"
-      - "'${settings.RemoteCMD}' == 'true'"
-      - "'${settings.RemoteLogging}' == 'false'"
-    - if (settings.RemoteCMD === true):
+      - "'${settings.remotecmd}' == 'true'"
+      - "'${settings.remotelogging}' == 'false'"
+    - if (settings.remotecmd === true):
         setGlobals: 
           REMOTE_COMMAND: AllowKey=system.run[*]
     - else:
         setGlobals: 
           REMOTE_COMMAND: DenyKey=system.run[*]
-    - if (settings.RemoteLogging === true):
+    - if (settings.remotelogging === true):
         setGlobals: 
           REMOTE_LOGGING: 1
     - else:
@@ -114,6 +114,6 @@ actions:
     - install: ${baseUrl}/scripts/configure-agent.jps
       settings:
         node: "${targetNodes.nodeGroup}"
-        RemoteLogging: ${globals.REMOTE_LOGGING}
-        RemoteCMD: ${globals.REMOTE_COMMAND}
+        remotelogging: ${globals.REMOTE_LOGGING}
+        remotecmd: ${globals.REMOTE_COMMAND}
       skipEmail: true

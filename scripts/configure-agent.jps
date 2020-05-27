@@ -13,11 +13,10 @@ settings:
       placeholder: 10.0.0.1
       required: true
     - type: checkbox
-      name: RemoteCMD
+      name: remotecmd
       caption: Enable remote commands from Zabbix server
-
     - type: checkbox
-      name: RemoteLogging
+      name: remotelogging
       caption: Enable logging of executed shell commands as warnings
  
 
@@ -32,15 +31,15 @@ actions:
     - assert:
       - "'${globals.REMOTE_LOGGING}' == 'true'"
       - "'${globals.REMOTE_COMMAND}' == 'false'"
-      - "'${settings.RemoteCMD}' == 'true'"
-      - "'${settings.RemoteLogging}' == 'false'"
-    - if (settings.RemoteCMD === true):
+      - "'${settings.remotecmd}' == 'true'"
+      - "'${settings.remotelogging}' == 'false'"
+    - if (settings.remotecmd === true):
         setGlobals: 
           REMOTE_COMMAND: AllowKey=system.run[*]
     - else:
         setGlobals: 
           REMOTE_COMMAND: DenyKey=system.run[*]
-    - if (settings.RemoteLogging === true):
+    - if (settings.remotelogging === true):
         setGlobals: 
           REMOTE_LOGGING: 1
     - else:
