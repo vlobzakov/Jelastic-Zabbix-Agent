@@ -15,6 +15,7 @@ targetNodes:
 
 globals:
   SERVER_IP: 
+  REMOTE_COMMAND:
 
 onInstall:
   - download-install-zabbix
@@ -48,6 +49,12 @@ actions:
         SERVER=$(hostname)
         sed -i '171d' /etc/zabbix/zabbix_agentd.conf
         sed -i "171i Hostname=$SERVER" /etc/zabbix/zabbix_agentd.conf
+        sed -i '119d' /etc/zabbix/zabbix_agentd.conf
+        sed -i "119i Server=${globals.SERVER_IP}" /etc/zabbix/zabbix_agentd.conf
+        sed -i '160d' /etc/zabbix/zabbix_agentd.conf
+        sed -i "160i ServerActive=${globals.SERVER_IP}" /etc/zabbix/zabbix_agentd.conf
+        sed -i '94d' /etc/zabbix/zabbix_agentd.conf
+        sed -i "94i EnableRemoteCommands=${globals.REMOTE_COMMAND}" /etc/zabbix/zabbix_agentd.conf
       user: root
       sayYes: true
 
