@@ -100,11 +100,15 @@ actions:
   update:
     - log: Configure the zabbix Agent
     - install: ${baseUrl}/scripts/update-agent.jps
+      settings:
+        node: "${targetNodes.nodeGroup}"
       skipEmail: true
 
   configure:
     - log: Configure the zabbix Agent
     - install: ${baseUrl}/scripts/configure-agent.jps
+      settings:
+        node: "${targetNodes.nodeGroup}"
       skipEmail: true
 
 
