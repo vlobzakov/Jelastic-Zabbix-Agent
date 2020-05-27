@@ -1,5 +1,5 @@
 type: update
-version: 1.1
+version: 0.1
 name: Zabbix Agent reconfig
 baseUrl: https://raw.githubusercontent.com/panslothda/Jelastic-Zabbix-Server/master
 logo: images/zabbix.svg
@@ -62,5 +62,6 @@ actions:
         sed -i "76i ${globals.REMOTE_COMMAND}" /etc/zabbix/zabbix_agentd.conf
         sed -i '103d' /etc/zabbix/zabbix_agentd.conf
         sed -i "103i LogRemoteCommands=${globals.REMOTE_LOGGING}" /etc/zabbix/zabbix_agentd.conf
+        systemctl restart zabbix-agent
       user: root
       sayYes: true
