@@ -7,13 +7,12 @@ homepage: https://zabbix.com
 description: |
   Zabbix Agent for monitoring of nodes and servers  
   This Addon installs the Agent and allows you to configure it.  
-  **Only CENTOS based nodes are supported**
+  **Only CENTOS nodes**
 short: Zabbix Agent for monitoring of nodes and servers
 skipNodeEmails: true
 
 targetNodes:
   nodeGroup: '*'
-
 
 settings:
   fields:
@@ -29,9 +28,6 @@ settings:
       name: remotelogging
       caption: Enable logging of executed shell commands as warnings
       value: false
-
-setGlobals:
-  REMOTE_LOGGING:
 
 onInstall:
   - variables-modification
@@ -100,7 +96,6 @@ actions:
         systemctl restart zabbix-agent
       user: root
       sayYes: true
-
 
   update:
     - log: Configure the zabbix Agent
