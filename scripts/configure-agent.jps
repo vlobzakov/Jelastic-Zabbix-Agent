@@ -5,7 +5,6 @@ baseUrl: https://raw.githubusercontent.com/panslothda/Jelastic-Zabbix-Server/mas
 logo: images/zabbix.svg
 skipNodeEmails: true
 
-
 settings:
   fields:
     - type: string
