@@ -51,7 +51,7 @@ actions:
 
   configure-zabbix-agent:
     - log: Configures the Zabbix Agent with chosen details
-    - cmd [${targetNodes.nodeGroup}]: |-
+    - cmd[${settings.node}]: |-
         SERVER=$(hostname)
         sed -i '171d' /etc/zabbix/zabbix_agentd.conf
         sed -i "171i Hostname=$SERVER" /etc/zabbix/zabbix_agentd.conf

@@ -31,6 +31,8 @@ settings:
       caption: Enable logging of executed shell commands as warnings
       value: false
 
+setGlobals:
+  REMOTE_LOGGING:
 
 onInstall:
   - variables-modification
@@ -110,4 +112,6 @@ actions:
     - install: ${baseUrl}/scripts/configure-agent.jps
       settings:
         node: "${targetNodes.nodeGroup}"
+        RemoteLogging: ${globals.REMOTE_LOGGING}
+        RemoteCMD: ${globals.REMOTE_COMMAND}
       skipEmail: true
