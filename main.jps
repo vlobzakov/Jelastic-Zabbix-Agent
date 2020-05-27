@@ -79,7 +79,7 @@ actions:
       sayYes: true
 
   configure-zabbix-agent:
-    - log: Configures the Zabbix Agent with chosen Details
+    - log: Configures the Zabbix Agent with chosen details
     - cmd [${targetNodes.nodeGroup}]: |-
         SERVER=$(hostname)
         sed -i '171d' /etc/zabbix/zabbix_agentd.conf
@@ -92,22 +92,20 @@ actions:
         sed -i "76i ${globals.REMOTE_COMMAND}" /etc/zabbix/zabbix_agentd.conf
         sed -i '103d' /etc/zabbix/zabbix_agentd.conf
         sed -i "103i LogRemoteCommands=${globals.REMOTE_LOGGING}" /etc/zabbix/zabbix_agentd.conf
+        systemctl restart zabbix-agent
       user: root
       sayYes: true
 
 
   update:
-    - log: Updates the zabbix Agent
-    - cmd [${targetNodes.nodeGroup}]: |-
-
-      user: root
-      sayYes: true
+    - log: Configure the zabbix Agent
+    - install: ${baseUrl}/scripts/update-agent.jps
+      skipEmail: true
 
   configure:
     - log: Configure the zabbix Agent
     - install: ${baseUrl}/scripts/configure-agent.jps
       skipEmail: true
-      settings:
 
 
 success:

@@ -1,0 +1,66 @@
+type: update
+version: 1.1
+name: Zabbix Agent reconfig
+baseUrl: https://raw.githubusercontent.com/panslothda/Jelastic-Zabbix-Server/master
+logo: images/zabbix.svg
+skipNodeEmails: true
+
+
+settings:
+  fields:
+    - type: string
+      name: serverIP
+      caption: Zabbix server IP
+      placeholder: 10.0.0.1
+      required: true
+    - type: checkbox
+      name: remoteCMD
+      caption: Enable remote commands from Zabbix server
+      value: false
+    - type: checkbox
+      name: remoteLogging
+      caption: Enable logging of executed shell commands as warnings
+      value: false
+
+globals:
+  SERVER_IP: ${settings.serverIP}
+  REMOTE_COMMAND: ${settings.remoteCMD}
+  REMOTE_LOGGING: ${settings.remoteLogging}
+
+
+onInstall:
+  - variables-modification
+  - configure-zabbix-agent
+
+actions:
+  variables-modification:
+    - log: check variables and set them correctly
+    - if (globals.REMOTE_COMMAND === true):
+        setGlobals: 
+          REMOTE_COMMAND: AllowKey=system.run[*]
+    - else:
+        setGlobals: 
+          REMOTE_COMMAND: DenyKey=system.run[*]
+    - if (globals.REMOTE_LOGGING === true):
+        setGlobals: 
+          REMOTE_LOGGING: 1
+    - else:
+        setGlobals: 
+          REMOTE_LOGGING: 0
+
+  configure-zabbix-agent:
+    - log: Configures the Zabbix Agent with chosen details
+    - cmd [${targetNodes.nodeGroup}]: |-
+        SERVER=$(hostname)
+        sed -i '171d' /etc/zabbix/zabbix_agentd.conf
+        sed -i "171i Hostname=$SERVER" /etc/zabbix/zabbix_agentd.conf
+        sed -i '119d' /etc/zabbix/zabbix_agentd.conf
+        sed -i "119i Server=${globals.SERVER_IP}" /etc/zabbix/zabbix_agentd.conf
+        sed -i '160d' /etc/zabbix/zabbix_agentd.conf
+        sed -i "160i ServerActive=${globals.SERVER_IP}" /etc/zabbix/zabbix_agentd.conf
+        sed -i '76d' /etc/zabbix/zabbix_agentd.conf
+        sed -i "76i ${globals.REMOTE_COMMAND}" /etc/zabbix/zabbix_agentd.conf
+        sed -i '103d' /etc/zabbix/zabbix_agentd.conf
+        sed -i "103i LogRemoteCommands=${globals.REMOTE_LOGGING}" /etc/zabbix/zabbix_agentd.conf
+      user: root
+      sayYes: true
