@@ -14,11 +14,13 @@ settings:
       required: true
     - type: checkbox
       name: remotecmd
+      value: false
       caption: Enable remote commands from Zabbix server
       showIf:
         true:
           type: checkbox
           name: remotelogging
+          value: false
           caption: Enable logging of executed shell commands as warnings
         false:
           type: compositefield
