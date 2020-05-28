@@ -35,7 +35,7 @@ actions:
       - "'${settings.remotelogging}' == 'false'"
     - if (settings.remotecmd === true):
         setGlobals: 
-          REMOTE_COMMAND: AllowKey=system.run[*]
+          REMOTE_COMMAND: EnableRemoteCommands=1
     - else:
         setGlobals: 
           REMOTE_COMMAND: DenyKey=system.run[*]
