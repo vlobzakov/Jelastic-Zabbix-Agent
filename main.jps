@@ -49,12 +49,6 @@ buttons:
 actions:
   variables-modification:
     - log: check variables and set them correctly
-    - assert:
-      - "'${settings.serverIP}' == '10.0.0.5'"
-      - "'${globals.REMOTE_LOGGING}' == 'true'"
-      - "'${globals.REMOTE_COMMAND}' == 'false'"
-      - "'${settings.remotecmd}' == 'true'"
-      - "'${settings.remotelogging}' == 'false'"
     - if (settings.remotecmd === true):
         setGlobals: 
           REMOTE_COMMAND: AllowKey=system.run[*]
