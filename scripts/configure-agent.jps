@@ -15,10 +15,31 @@ settings:
     - type: checkbox
       name: remotecmd
       caption: Enable remote commands from Zabbix server
-    - type: checkbox
-      name: remotelogging
-      caption: Enable logging of executed shell commands as warnings
- 
+      showIf:
+        true:
+          type: checkbox
+          name: remotelogging
+          caption: Enable logging of executed shell commands as warnings
+        false:
+          type: compositefield
+          hideLabel: true
+          pack: left
+          name: remotelogging
+          value: false
+          itemCls: deploy-manager-grid
+          cls: x-grid3-row-unselected
+          items: [{
+            type: "displayfield",
+            cls: "x-grid3-row-checker x-item-disabled",
+            margins: "0 0 0 -3",
+            width: 20,
+            height: 20
+          }, {
+            type: "displayfield",
+            cls: "x-item-disabled",
+            value: "Enable logging of executed shell commands as warnings",
+            margins: "0 0 0 10"
+          }]
 
 
 onInstall:
@@ -28,14 +49,9 @@ onInstall:
 actions:
   variables-modification:
     - log: check variables and set them correctly
-    - assert:
-      - "'${globals.REMOTE_LOGGING}' == 'true'"
-      - "'${globals.REMOTE_COMMAND}' == 'false'"
-      - "'${settings.remotecmd}' == 'true'"
-      - "'${settings.remotelogging}' == 'false'"
     - if (settings.remotecmd === true):
         setGlobals: 
-          REMOTE_COMMAND: EnableRemoteCommands=1
+          REMOTE_COMMAND: EnableRemoteCommands=1 
     - else:
         setGlobals: 
           REMOTE_COMMAND: DenyKey=system.run[*]
