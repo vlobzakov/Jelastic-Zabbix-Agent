@@ -24,9 +24,6 @@ settings:
     - type: checkbox
       name: remotecmd
       caption: Enable remote commands from Zabbix server
-    - type: checkbox
-      name: remotelogging
-      caption: Enable remote commands from Zabbix server
       showIf:
         true:
           type: checkbox
