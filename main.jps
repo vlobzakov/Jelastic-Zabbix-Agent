@@ -107,3 +107,5 @@ actions:
         remotelogging: ${globals.REMOTE_LOGGING}
         remotecmd: ${globals.REMOTE_COMMAND}
       skipEmail: true
+
+success: text/success.md
