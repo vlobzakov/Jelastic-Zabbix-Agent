@@ -1,0 +1,17 @@
+type: update
+version: 0.1
+name: Zabbix Agent update
+baseUrl: https://raw.githubusercontent.com/panslothda/Jelastic-Zabbix-Server/master
+logo: images/zabbix.svg
+skipNodeEmails: true
+
+
+onInstall:
+  - update-zabbix
+
+
+actions:
+  update-zabbix:
+    - log: Updates zabbix Agent
+    - cmd [${targetNodes.nodeGroup}]: |-
+        wget 
