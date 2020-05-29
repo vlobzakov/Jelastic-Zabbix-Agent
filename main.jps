@@ -4,11 +4,15 @@ name: Zabbix Agent
 baseUrl: https://raw.githubusercontent.com/panslothda/Jelastic-Zabbix-Agent/master
 logo: images/zabbix.svg
 homepage: https://zabbix.com
-description: |
-  Zabbix Agent for monitoring of nodes and servers  
-  This Addon installs the Agent and allows you to configure/update it  
-  **Only CENTOS nodes**
-short: Zabbix Agent for monitoring of nodes and servers
+
+description:
+  text: |
+    Zabbix Agent for monitoring of nodes and servers  
+    This Addon installs the Agent and allows you to configure and update it  
+    **Only CENTOS nodes are supported**
+
+  short: The buttons allow you to reconfigure the agent as well as update it
+
 skipNodeEmails: true
 
 targetNodes:
@@ -161,4 +165,4 @@ actions:
 
 success:
   type: info
-  message: text/success.md
+  message: ${baseUrl}/text/success.md
