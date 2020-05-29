@@ -30,7 +30,8 @@ All 3 get set in /etc/zabbix/zabbix_agentd.conf
 
 Server IP gets set as the config options <code>ServerActive</code> and <code>Server</code>\
 Remote Command execution either sets <code>EnableRemoteCommands=1</code> or <code>DenyKey=system.run[*]</code> \
-Remote Logging is only available if Remote Command is activated and sets either <code>LogRemoteCommands=1</code> or <code>LogRemoteCommands=0</code>\
+Remote Logging is only available if Remote Command is activated and sets either <code>LogRemoteCommands=1</code> or <code>LogRemoteCommands=0</code>
+
 
 Once the Addon is installed there are 2 available buttons:
 
