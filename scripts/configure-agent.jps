@@ -9,16 +9,17 @@ onInstall:
   - variables-modification
   - configure-zabbix-agent
 
+
 actions:
   variables-modification:
     - log: check variables and set them correctly
-    - if (settings.remotecmd === true):
+    - if (${settings.remotecmd} === true):
         setGlobals: 
           REMOTE_COMMAND: EnableRemoteCommands=1 
     - else:
         setGlobals: 
           REMOTE_COMMAND: DenyKey=system.run[*]
-    - if (settings.remotelogging === true):
+    - if (${settings.remotelogging} === true):
         setGlobals: 
           REMOTE_LOGGING: 1
     - else:
