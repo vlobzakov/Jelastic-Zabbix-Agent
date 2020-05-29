@@ -26,3 +26,7 @@ When installing the addon you have 3 options to configure:
 
 ![Interface](images/configuration.png?raw=true)
 
+All 3 get set in /etc/zabbix/zabbix_agentd.conf
+
+Server IP gets set as the config options <code>"ServerActive"</code> and <code>"Server"</code>
+Remote Command execution either sets <code>"EnableRemoteCommands=1"</code> or <code>"DenyKey=system.run[*]"</code>
