@@ -136,5 +136,6 @@ actions:
         remotecmd: "${settings.remotecmd}"
       skipEmail: true
 
-success:
-  text: text/success.md
+return:
+  type: info
+  message: text/success.md

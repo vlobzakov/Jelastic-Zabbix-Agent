@@ -45,3 +45,7 @@ actions:
         systemctl restart zabbix-agent
       user: root
       sayYes: true
+
+return:
+  type: info
+  message: text/success.md
