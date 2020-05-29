@@ -24,7 +24,7 @@ Or copy the content of main.jps into the import window.
 # Usage
 When installing the addon you have 3 options to configure:
 
-![Interface](images/configuration.png)
+<img src="https://github.com/panslothda/Jelastic-Zabbix-Agent/raw/master/images/configuration.png" width="520">
 
 All 3 get set in /etc/zabbix/zabbix_agentd.conf
 
