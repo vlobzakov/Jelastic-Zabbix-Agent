@@ -24,7 +24,7 @@ Or copy the content of main.jps into the import window.
 # Usage
 When installing the addon you have 3 options to configure:
 
-![Interface](images/configuration.png?raw=true)
+![Interface](images/configuration.png)
 
 All 3 get set in /etc/zabbix/zabbix_agentd.conf
 
@@ -35,7 +35,7 @@ Remote Logging is only available if Remote Command is activated and sets either 
 
 Once the Addon is installed there are 2 available buttons:
 
-![Interface](images/interface.png?raw=true)
+![Interface](images/interface.png)
 
 Update will update the agent to newest version.
 
