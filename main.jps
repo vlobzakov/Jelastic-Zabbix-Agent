@@ -53,12 +53,16 @@ settings:
               margins: "0 0 0 10"
             }]
 
+onUninstall:
+  - delete
+
+onAfterRedeployContainer:
+  - redeploy
 
 onInstall:
   - variables-modification
   - download-install-zabbix
   - configure-zabbix-agent
-
 
 buttons:
   - confirmText: Do you want to update the Zabbix Agent?
@@ -71,7 +75,6 @@ buttons:
     settings: main
     loadingText: Configuring...
     successText: /text/success.md
-
 
 actions:
   variables-modification:
@@ -133,6 +136,26 @@ actions:
         remotelogging: "${settings.remotelogging}"
         remotecmd: "${settings.remotecmd}"
       skipEmail: true
+
+  redeploy:
+    - log: re-downloads and enables agent
+    - cmd [${targetNodes.nodeGroup}]: |-
+        rpm --import https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-A14FE591 &>> /var/log/run.log
+        rpm -Uvh https://repo.zabbix.com/zabbix/5.0/rhel/7/x86_64/zabbix-agent-5.0.0-1.el7.x86_64.rpm &>> /var/log/run.log
+        systemctl start zabbix-agent
+        systemctl enable zabbix-agent
+      user: root
+      sayYes: true    
+
+  delete:
+    - log: Removes config and uninstalls agent
+    - cmd [${targetNodes.nodeGroup}]: |-
+        systemctl disable zabbix-agent
+        systemctl stop zabbix-agent
+        yum -y remove zabbix-agent
+        rm -r /etc/zabbix
+      user: root
+      sayYes: true
 
 return:
   type: info
