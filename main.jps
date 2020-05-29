@@ -6,7 +6,7 @@ logo: images/zabbix.svg
 homepage: https://zabbix.com
 description: |
   Zabbix Agent for monitoring of nodes and servers  
-  This Addon installs the Agent and allows you to configure it.  
+  This Addon installs the Agent and allows you to configure/update it  
   **Only CENTOS nodes**
 short: Zabbix Agent for monitoring of nodes and servers
 skipNodeEmails: true
@@ -121,9 +121,6 @@ actions:
         systemctl enable zabbix-agent
       user: root
       sayYes: true
-      return:
-        type: info
-        message: text/success.md
 
   update:
     - log: Configure the zabbix Agent
@@ -162,6 +159,6 @@ actions:
       user: root
       sayYes: true
 
-return:
+success:
   type: info
   message: text/success.md
