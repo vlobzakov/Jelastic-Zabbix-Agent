@@ -121,6 +121,9 @@ actions:
         systemctl enable zabbix-agent
       user: root
       sayYes: true
+      return:
+        type: info
+        message: text/success.md
 
   update:
     - log: Configure the zabbix Agent
