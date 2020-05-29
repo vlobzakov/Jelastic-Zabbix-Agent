@@ -25,8 +25,6 @@ actions:
     - else:
         setGlobals: 
           REMOTE_LOGGING: 0
-    - setGlobals:
-        SERVER_IP: ${settings.serverip}
 
   configure-zabbix-agent:
     - log: Configures the Zabbix Agent with chosen details
@@ -35,9 +33,9 @@ actions:
         sed -i '171d' /etc/zabbix/zabbix_agentd.conf
         sed -i "171i Hostname=$SERVER" /etc/zabbix/zabbix_agentd.conf
         sed -i '119d' /etc/zabbix/zabbix_agentd.conf
-        sed -i "119i Server=${globals.SERVER_IP}" /etc/zabbix/zabbix_agentd.conf
+        sed -i "119i Server=${settings.serverip}" /etc/zabbix/zabbix_agentd.conf
         sed -i '160d' /etc/zabbix/zabbix_agentd.conf
-        sed -i "160i ServerActive=${globals.SERVER_IP}" /etc/zabbix/zabbix_agentd.conf
+        sed -i "160i ServerActive=${settings.serverip}" /etc/zabbix/zabbix_agentd.conf
         sed -i '76d' /etc/zabbix/zabbix_agentd.conf
         sed -i "76i ${globals.REMOTE_COMMAND}" /etc/zabbix/zabbix_agentd.conf
         sed -i '103d' /etc/zabbix/zabbix_agentd.conf
