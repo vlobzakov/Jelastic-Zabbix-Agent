@@ -67,6 +67,7 @@ buttons:
     successText: Zabbix Agent has been upgraded
   - caption: Configure
     action: configure
+    loadingText: Configuring...
     successText: /text/success.md
 
 
@@ -130,4 +131,5 @@ actions:
         node: "${targetNodes.nodeGroup}"
       skipEmail: true
 
-success: text/success.md
+success:
+  text: text/success.md
