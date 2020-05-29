@@ -17,7 +17,7 @@ targetNodes:
 settings:
   fields:
     - type: string
-      name: serverIP
+      name: serverip
       caption: Zabbix server IP
       placeholder: 10.0.0.1
       required: true
@@ -66,8 +66,8 @@ buttons:
     caption: Update Zabbix Agent
     successText: Zabbix Agent has been upgraded
   - caption: Configure
-    settings: main
     action: configure
+    successText: /text/success.md
 
 
 actions:
@@ -86,7 +86,7 @@ actions:
         setGlobals: 
           REMOTE_LOGGING: 0
     - setGlobals:
-        SERVER_IP: ${settings.serverIP}
+        SERVER_IP: ${settings.serverip}
 
   download-install-zabbix:
     - log: Downloads and installs Zabbix Agent
@@ -128,8 +128,6 @@ actions:
     - install: ${baseUrl}/scripts/configure-agent.jps
       settings:
         node: "${targetNodes.nodeGroup}"
-        remotelogging: ${globals.REMOTE_LOGGING}
-        remotecmd: ${globals.REMOTE_COMMAND}
       skipEmail: true
 
 success: text/success.md

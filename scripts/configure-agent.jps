@@ -8,7 +8,7 @@ skipNodeEmails: true
 settings:
   fields:
     - type: string
-      name: serverIP
+      name: serverip
       caption: Zabbix server IP
       placeholder: 10.0.0.1
       required: true
@@ -64,7 +64,7 @@ actions:
         setGlobals: 
           REMOTE_LOGGING: 0
     - setGlobals:
-        SERVER_IP: ${settings.serverIP}
+        SERVER_IP: ${settings.serverip}
 
   configure-zabbix-agent:
     - log: Configures the Zabbix Agent with chosen details
