@@ -35,7 +35,7 @@ Remote Logging is only available if Remote Command is activated and sets either 
 
 Once the Addon is installed there are 2 available buttons:
 
-![Interface](images/interface.png)
+<img src="https://github.com/panslothda/Jelastic-Zabbix-Agent/raw/master/images/interface.png" width="520">
 
 Update will update the agent to newest version.
 
