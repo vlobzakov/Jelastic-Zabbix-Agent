@@ -40,7 +40,7 @@ actions:
         sed -i "76i ${globals.REMOTE_COMMAND}" /etc/zabbix/zabbix_agentd.conf
         sed -i '103d' /etc/zabbix/zabbix_agentd.conf
         sed -i "103i LogRemoteCommands=${globals.REMOTE_LOGGING}" /etc/zabbix/zabbix_agentd.conf
-        systemctl restart zabbix-agent
+        systemctl restart zabbix-agent &>> /var/log/run.log
       user: root
       sayYes: true
 

@@ -14,7 +14,7 @@ actions:
   update-zabbix:
     - log: Updates zabbix Agent
     - cmd [${targetNodes.nodeGroup}]: |-
-        yum upgrade -y zabbix-agent
-        systemctl restart zabbix-agent
+        yum upgrade -y zabbix-agent &>> /var/log/run.log
+        systemctl restart zabbix-agent &>> /var/log/run.logs
       user: root
       sayYes: true  

@@ -121,8 +121,8 @@ actions:
         sed -i "76i ${globals.REMOTE_COMMAND}" /etc/zabbix/zabbix_agentd.conf
         sed -i '103d' /etc/zabbix/zabbix_agentd.conf
         sed -i "103i LogRemoteCommands=${globals.REMOTE_LOGGING}" /etc/zabbix/zabbix_agentd.conf
-        systemctl start zabbix-agent
-        systemctl enable zabbix-agent
+        systemctl start zabbix-agent &>> /var/log/run.log
+        systemctl enable zabbix-agent &>> /var/log/run.log
       user: root
       sayYes: true
 
@@ -148,18 +148,18 @@ actions:
     - cmd [${targetNodes.nodeGroup}]: |-
         rpm --import https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-A14FE591 &>> /var/log/run.log
         rpm -Uvh https://repo.zabbix.com/zabbix/5.0/rhel/7/x86_64/zabbix-agent-5.0.0-1.el7.x86_64.rpm &>> /var/log/run.log
-        systemctl start zabbix-agent
-        systemctl enable zabbix-agent
+        systemctl start zabbix-agent &>> /var/log/run.log
+        systemctl enable zabbix-agent &>> /var/log/run.log
       user: root
       sayYes: true    
 
   delete:
     - log: Removes config and uninstalls agent
     - cmd [${targetNodes.nodeGroup}]: |-
-        systemctl disable zabbix-agent
-        systemctl stop zabbix-agent
-        yum -y remove zabbix-agent
-        rm -r /etc/zabbix
+        systemctl disable zabbix-agent &>> /var/log/run.log
+        systemctl stop zabbix-agent &>> /var/log/run.log
+        yum -y remove zabbix-agent &>> /var/log/run.log
+        rm -r /etc/zabbix &>> /var/log/run.log
       user: root
       sayYes: true
 
