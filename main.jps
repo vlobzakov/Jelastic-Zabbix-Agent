@@ -89,6 +89,7 @@ actions:
     - else:
         setGlobals: 
           REMOTE_COMMAND: DenyKey=system.run[*]
+          REMOTE_LOGGING: 0
     - if (settings.remotelogging === true):
         setGlobals: 
           REMOTE_LOGGING: 1
