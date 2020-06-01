@@ -47,4 +47,4 @@ actions:
 
 return:
   type: info
-  message: text/success.md
+  message: ${baseUrl}/text/success.md
