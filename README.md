@@ -15,7 +15,7 @@ If it says centos then you can install this addon.
 # Installation
 Simply import this link using the Jelastic JPS Import function:
 ```
-https://raw.githubusercontent.com/panslothda/Jelastic-Zabbix-server/master/main.jps
+https://raw.githubusercontent.com/panslothda/Jelastic-Zabbix-Agent/master/main.jps
 ```
 
 Or copy the content of main.jps into the import window.
