@@ -17,7 +17,7 @@ actions:
         yum upgrade -y zabbix-agent &>> /var/log/run.log
         systemctl restart zabbix-agent &>> /var/log/run.logs
       user: root
-      sayYes: true  
+      sayYes: true
 
 return:
   type: info
