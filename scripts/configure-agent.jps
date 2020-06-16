@@ -47,4 +47,4 @@ actions:
 
 return:
   type: info
-  message: ${baseUrl}/text/success.md
+  message: Zabbix Agent has been re-configured
