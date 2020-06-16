@@ -18,3 +18,7 @@ actions:
         systemctl restart zabbix-agent &>> /var/log/run.logs
       user: root
       sayYes: true  
+
+return:
+  type: info
+  message: Zabbix Agent has been updated
