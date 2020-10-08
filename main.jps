@@ -65,6 +65,7 @@ onAfterRedeployContainer:
 
 onInstall:
   - variables-modification
+  - set-firewall
   - download-install-zabbix
   - configure-zabbix-agent
 
@@ -98,6 +99,17 @@ actions:
           REMOTE_LOGGING: 0
     - setGlobals:
         SERVER_IP: ${settings.serverip}
+
+  set-firewall:
+    api[cp]:
+      - method: environment.security.addrule
+        params:
+          rule: {
+            action: "ALLOW",
+            direction: "INPUT",
+            name: "Zabbix Agents",
+            ports: "10051"
+            }
 
   download-install-zabbix:
     - log: Downloads and installs Zabbix Agent
