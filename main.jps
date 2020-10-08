@@ -34,7 +34,7 @@ settings:
           true:
             type: checkbox
             name: remotelogging
-            value: false
+            value: true
             caption: Enable logging of executed shell commands as warnings
           false:
             type: compositefield
