@@ -102,6 +102,7 @@ actions:
   download-install-zabbix:
     - log: Downloads and installs Zabbix Agent
     - cmd [${targetNodes.nodeGroup}]: |-
+        yum install -y logrotate
         rpm --import https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-A14FE591 &>> /var/log/run.log
         rpm -Uvh https://repo.zabbix.com/zabbix/5.0/rhel/7/x86_64/zabbix-agent-5.0.0-1.el7.x86_64.rpm &>> /var/log/run.log
         echo /etc/zabbix >> /etc/jelastic/redeploy.conf
