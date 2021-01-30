@@ -34,9 +34,9 @@ actions:
         sed -i '171d' /etc/zabbix/zabbix_agentd.conf
         sed -i "171i Hostname=$SERVER" /etc/zabbix/zabbix_agentd.conf
         sed -i '119d' /etc/zabbix/zabbix_agentd.conf
-        sed -i "119i Server=${settings.serverip}" /etc/zabbix/zabbix_agentd.conf
+        sed -i "119i Server=127.0.0.1,${settings.serverip}" /etc/zabbix/zabbix_agentd.conf
         sed -i '160d' /etc/zabbix/zabbix_agentd.conf
-        sed -i "160i ServerActive=${settings.serverip}" /etc/zabbix/zabbix_agentd.conf
+        sed -i "160i ServerActive=127.0.0.1,${settings.serverip}" /etc/zabbix/zabbix_agentd.conf
         sed -i '76d' /etc/zabbix/zabbix_agentd.conf
         sed -i "76i ${globals.REMOTE_COMMAND}" /etc/zabbix/zabbix_agentd.conf
         sed -i '103d' /etc/zabbix/zabbix_agentd.conf
