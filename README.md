@@ -24,7 +24,7 @@ Or copy the content of main.jps into the import window.
 # Usage
 When installing the addon you have 3 options to configure:
 
-<img src="https://github.com/panslothda/Jelastic-Zabbix-Agent/raw/master/images/configuration.png" width="520">
+<img src="https://github.com/Aureliolo/Jelastic-Zabbix-Agent/raw/master/images/configuration.png" width="520">
 
 All 3 get set in /etc/zabbix/zabbix_agentd.conf
 
@@ -35,7 +35,7 @@ Remote Logging is only available if Remote Command is activated and sets either 
 
 Once the Addon is installed there are 2 available buttons:
 
-<img src="https://github.com/panslothda/Jelastic-Zabbix-Agent/raw/master/images/interface.png" width="520">
+<img src="https://github.com/Aureliolo/Jelastic-Zabbix-Agent/raw/master/images/interface.png" width="520">
 
 Update will update the agent to newest version.
 

@@ -1,6 +1,6 @@
 type: update
 name: Zabbix Agent reconfig
-baseUrl: https://raw.githubusercontent.com/panslothda/Jelastic-Zabbix-Server/master
+baseUrl: https://raw.githubusercontent.com/Aureliolo/Jelastic-Zabbix-Server/master
 logo: images/zabbix.svg
 skipNodeEmails: true
 
