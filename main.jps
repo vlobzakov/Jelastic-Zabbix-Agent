@@ -1,6 +1,6 @@
 type: update
 name: Zabbix Agent
-baseUrl: https://raw.githubusercontent.com/Aureliolo/Jelastic-Zabbix-Agent/master
+baseUrl: https://raw.githubusercontent.com/vlobzakov/Jelastic-Zabbix-Agent/master
 logo: images/zabbix.svg
 homepage: https://zabbix.com
 
